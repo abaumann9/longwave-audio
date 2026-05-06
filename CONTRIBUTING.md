@@ -23,11 +23,11 @@ Thanks for your interest in contributing! This project is in early development a
 
 ### Server Side
 
-See [docs/server-setup.md](docs/server-setup.md) for Snapserver and librespot setup.
+See [guides/server-setup.md](guides/server-setup.md) for Snapserver and librespot setup.
 
 ### Client Firmware
 
-See [docs/client-firmware.md](docs/client-firmware.md) for ESP-IDF toolchain setup and build instructions.
+See [guides/client-firmware.md](guides/client-firmware.md) for ESP-IDF toolchain setup and build instructions.
 
 ## License
 
