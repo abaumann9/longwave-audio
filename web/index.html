@@ -250,8 +250,31 @@
         <li>Select your board and region above, then click <strong>Install Firmware</strong>.</li>
         <li>Select the serial port when prompted and wait for the flash to complete.</li>
         <li>Once flashing is done, press <code>RESET</code> (without holding <code>BOOT</code>) to boot into the new firmware.</li>
-        <li>See the <a href="https://github.com/longwave-audio/longwave-audio/blob/main/docs/client-firmware.md">firmware docs</a> for first-boot setup.</li>
       </ol>
+    </div>
+
+    <div class="instructions">
+      <h3>Provision with ESP SoftAP</h3>
+      <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.75rem;">
+        After flashing, the endpoint advertises a 2.4 GHz Wi-Fi network for one-time setup. Use Espressif's SoftAP Provisioning app (not the QR / BLE variant) to push your Wi-Fi HaLow credentials.
+      </p>
+      <ol>
+        <li>Install the app: <a href="https://apps.apple.com/app/esp-softap-provisioning/id1474664106" style="color: var(--accent-light);">iOS</a> · <a href="https://play.google.com/store/apps/details?id=com.espressif.provsoftap" style="color: var(--accent-light);">Android</a>.</li>
+        <li>On your phone, join the device's 2.4 GHz Wi-Fi network — SSID begins with <code>PROV_</code>, no password.</li>
+        <li>Open the app, tap <strong>Provision New Device</strong>, and choose the option to connect manually (skip the QR code).</li>
+        <li>Enter the proof of possession: <code>longwave</code></li>
+        <li>Select your Wi-Fi HaLow SSID, enter the password, and confirm.</li>
+        <li>The endpoint reboots, joins the HaLow network, and connects to Snapserver.</li>
+      </ol>
+      <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.75rem;">
+        The app may report <strong>"failed to associate"</strong> at the end — safe to ignore. The endpoint tears down its SoftAP once it has the credentials, which disconnects the phone. Provisioning succeeded.
+      </p>
+      <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.5rem;">
+        To clear stored credentials and re-provision, hold <code>RESET</code> for 5 seconds until the LED flashes red.
+      </p>
+      <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.75rem;">
+        Full instructions: <a href="https://github.com/longwave-audio/longwave-audio/blob/main/docs/client-firmware.md" style="color: var(--accent-light);">firmware docs</a>.
+      </p>
     </div>
 
     <p class="browser-note">

@@ -35,8 +35,9 @@ It combines existing open-source software — [Snapcast](https://github.com/snap
 1. **Set up the server** - Install Snapserver and librespot on a Linux machine. See [Server Setup](docs/server-setup.md).
 2. **Set up the HaLow network** - Configure a Wi-Fi HaLow AP on the server side and connect endpoints. See [HaLow Networking](docs/halow-networking.md).
 3. **Build an endpoint** - Assemble the XIAO ESP32-S3 Plus + HaLow module + DAC hat. See [Hardware Guide](docs/hardware-guide.md).
-4. **Flash the firmware** - Build and flash the snapclient firmware to the ESP32. See [Client Firmware](docs/client-firmware.md).
-5. **Play music** - Open Spotify, select the LongWave device, and enjoy synchronized audio across your property.
+4. **Flash the firmware** - Use the [browser-based flasher](https://longwave-audio.github.io/longwave-audio/) to install prebuilt firmware over USB-C. Building from source is for developers — see [Client Firmware](docs/client-firmware.md).
+5. **Provision the endpoint** - Use the ESP SoftAP Provisioning app ([iOS](https://apps.apple.com/app/esp-softap-provisioning/id1474664106) / [Android](https://play.google.com/store/apps/details?id=com.espressif.provsoftap)) to push your Wi-Fi HaLow credentials. Proof of possession is `longwave`. See [Client Firmware](docs/client-firmware.md#provisioning-esp-softap).
+6. **Play music** - Open Spotify, select the LongWave device, and enjoy synchronized audio across your property.
 
 ## Software Dependencies
 
@@ -67,7 +68,7 @@ It combines existing open-source software — [Snapcast](https://github.com/snap
 - [x] Port snapclient to work over Wi-Fi HaLow (SPI driver integration)
 - [x] I2S pin mapping and audio output verification
 - [x] Buffer/latency tuning for HaLow transport
-- [ ] Provisioning and configuration workflow
+- [x] Provisioning and configuration workflow (ESP SoftAP)
 - [ ] Enclosure design
 - [ ] Documentation and build guides
 - [x] Performance benchmarks (range, latency, audio quality)
