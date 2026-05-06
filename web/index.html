@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LongWave Audio — Flash Firmware</title>
+  <script
+    type="module"
+    src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"
+  ></script>
+  <style>
+    :root {
+      --bg: #0A0E14;
+      --surface: #131820;
+      --border: #1E2530;
+      --text: #E1F5EE;
+      --text-muted: #7A8A9E;
+      --accent: #1D9E75;
+      --accent-light: #5DCAA5;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      text-align: center;
+      padding: 3rem 1.5rem 2rem;
+      max-width: 600px;
+    }
+
+    header svg {
+      width: 100%;
+      max-width: 480px;
+      margin-bottom: 1rem;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    main {
+      width: 100%;
+      max-width: 640px;
+      padding: 0 1.5rem 3rem;
+    }
+
+    .board-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .board-card h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+
+    .board-card p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .board-card esp-web-install-button {
+      --esp-tools-button-color: var(--accent);
+      --esp-tools-button-text-color: var(--text);
+    }
+
+    .board-card esp-web-install-button button {
+      background: var(--accent);
+      color: var(--text);
+      border: none;
+      border-radius: 8px;
+      padding: 0.6rem 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .board-card esp-web-install-button button:hover {
+      background: var(--accent-light);
+      color: var(--bg);
+    }
+
+    .instructions {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .instructions h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .instructions ol {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      line-height: 1.8;
+      padding-left: 1.25rem;
+    }
+
+    .instructions code {
+      background: var(--border);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+
+    .region-select {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .region-select label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .region-select select {
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.35rem 0.6rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .region-select select:focus {
+      outline: 1px solid var(--accent);
+    }
+
+    .browser-note {
+      margin-top: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-align: center;
+    }
+
+    .browser-note a {
+      color: var(--accent-light);
+      text-decoration: none;
+    }
+
+    .browser-note a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    footer a {
+      color: var(--accent-light);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" aria-label="LongWave Audio">
+      <defs>
+        <linearGradient id="wave-grad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#085041"/>
+          <stop offset="40%" stop-color="#1D9E75"/>
+          <stop offset="100%" stop-color="#5DCAA5"/>
+        </linearGradient>
+      </defs>
+      <path d="M0 100 Q85 50, 170 100 Q255 150, 340 100 Q425 50, 510 100 Q595 150, 680 100" fill="none" stroke="url(#wave-grad)" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M0 100 Q42 80, 85 100 Q127 120, 170 100 Q212 80, 255 100 Q297 120, 340 100 Q382 80, 425 100 Q467 120, 510 100 Q552 80, 595 100 Q637 120, 680 100" fill="none" stroke="#5DCAA5" stroke-width="0.8" opacity="0.3" stroke-linecap="round"/>
+      <circle cx="170" cy="100" r="2.5" fill="#1D9E75" opacity="0.8"/>
+      <circle cx="340" cy="100" r="2.5" fill="#5DCAA5" opacity="0.8"/>
+      <circle cx="510" cy="100" r="2.5" fill="#1D9E75" opacity="0.8"/>
+      <text x="340" y="60" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="32" font-weight="500" fill="#E1F5EE" letter-spacing="2">LongWave Audio</text>
+      <text x="340" y="155" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#9FE1CB" letter-spacing="1">open source multi-room audio over Wi-Fi HaLow</text>
+    </svg>
+    <p>Flash firmware directly to your LongWave endpoint from the browser. Connect your board via USB-C, select it below, and click install.</p>
+  </header>
+
+  <main>
+    <div class="board-card">
+      <h2>Board A — Wio-WM6180</h2>
+      <p>XIAO ESP32-S3 Plus with Seeed Studio Wio-WM6180 Wi-Fi HaLow module and DAC hat.</p>
+      <div class="region-select">
+        <label for="region-a">Region</label>
+        <select id="region-a" onchange="updateManifest('board-a', this.value)">
+          <option value="AU2020">AU2020 (Australia 2020)</option>
+          <option value="AU">AU (Australia)</option>
+          <option value="US">US (United States)</option>
+        </select>
+      </div>
+      <esp-web-install-button id="board-a" manifest="firmware/fgh100m/AU2020/manifest.json">
+        <button slot="activate">Install Firmware</button>
+        <span slot="unsupported">Your browser does not support Web Serial. Use Chrome or Edge.</span>
+        <span slot="not-allowed">This page must be served over HTTPS to flash firmware.</span>
+      </esp-web-install-button>
+    </div>
+
+    <div class="board-card">
+      <h2>Board B — Custom PCB (mm8108)</h2>
+      <p>XIAO ESP32-S3 Plus with custom OSHWLab mm8108 Wi-Fi HaLow PCB and DAC hat.</p>
+      <div class="region-select">
+        <label for="region-b">Region</label>
+        <select id="region-b" onchange="updateManifest('board-b', this.value)">
+          <option value="AU2020">AU2020 (Australia 2020)</option>
+          <option value="AU">AU (Australia)</option>
+          <option value="US">US (United States)</option>
+        </select>
+      </div>
+      <esp-web-install-button id="board-b" manifest="firmware/mm8108/AU2020/manifest.json">
+        <button slot="activate">Install Firmware</button>
+        <span slot="unsupported">Your browser does not support Web Serial. Use Chrome or Edge.</span>
+        <span slot="not-allowed">This page must be served over HTTPS to flash firmware.</span>
+      </esp-web-install-button>
+    </div>
+
+    <div class="instructions">
+      <h3>How to flash</h3>
+      <ol>
+        <li>Connect your XIAO ESP32-S3 Plus to your computer with a USB-C cable.</li>
+        <li>Put the board into download mode: hold <code>BOOT</code>, tap <code>RESET</code>, then release <code>BOOT</code>. The board should appear as a serial port in Chrome.</li>
+        <li>Select your board and region above, then click <strong>Install Firmware</strong>.</li>
+        <li>Select the serial port when prompted and wait for the flash to complete.</li>
+        <li>Once flashing is done, press <code>RESET</code> (without holding <code>BOOT</code>) to boot into the new firmware.</li>
+        <li>See the <a href="https://github.com/longwave-audio/longwave-audio/blob/main/docs/client-firmware.md">firmware docs</a> for first-boot setup.</li>
+      </ol>
+    </div>
+
+    <p class="browser-note">
+      Requires <strong>Chrome</strong> or <strong>Edge</strong> on desktop. Uses the
+      <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API">Web Serial API</a>
+      via <a href="https://esphome.github.io/esp-web-tools/">ESP Web Tools</a>.
+    </p>
+  </main>
+
+  <footer>
+    <a href="https://github.com/longwave-audio/longwave-audio">GitHub</a>
+  </footer>
+
+  <script>
+    const chipsets = { 'board-a': 'fgh100m', 'board-b': 'mm8108' };
+    function updateManifest(board, region) {
+      document.getElementById(board).setAttribute('manifest', `firmware/${chipsets[board]}/${region}/manifest.json`);
+    }
+  </script>
+</body>
+</html>

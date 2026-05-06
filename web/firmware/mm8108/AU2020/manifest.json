@@ -1,0 +1,11 @@
+{
+  "name": "LongWave Audio — Board B (AU2020)",
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "parts": [
+        { "path": "snapclient_merged.bin", "offset": 0 }
+      ]
+    }
+  ]
+}
